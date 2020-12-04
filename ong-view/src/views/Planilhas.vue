@@ -8,26 +8,27 @@
   </b-table>
 
   <b-modal @hide="resetaModalData()" :id="modalData.id" :title="modalData.title">
-      <Formulario :usuarioEdit="modalData.content" :callback="modalData.callback"></Formulario>
+      <!-- <Formulario :usuarioEdit="modalData.content" :callback="modalData.callback"></Formulario> -->
   </b-modal>
   
 </div>  
 </template>
 
 <script>
-import Formulario from "@/components/Formulario.vue";
+/* import Formulario from "@/components/Formulario.vue"; */
 export default {
     components:{
-      Formulario,
+      /* Formulario, */
     },
     data() {
       return {
         // Note `isActive` is left out and will not appear in the rendered table
         fields: ['nome', 'nascimento', 'endereco', 'bairro', 'cidade', 'telefone', 'grupo', 'editar'],
-        items: []
-          // {nome:"Daniel 1",nascimento:new Date(),endereco:"Rua 1",bairro:"jardim 1",cidade:"BJP",telefone:"111",grupo:"Estagiário"},
-          // {nome:"Daniel 2",nascimento:new Date(),endereco:"Rua 2",bairro:"jardim 2",cidade:"Atibaia",telefone:"222",grupo:"Criança"},
-          // {nome:"Daniel 3",nascimento:new Date(),endereco:"Rua 3",bairro:"jardim 3",cidade:"Bragança",telefone:"333",grupo:"Voluntário"}
+        items: [
+           {nome:"Daniel 1",nascimento:new Date(),endereco:"Rua 1",bairro:"jardim 1",cidade:"BJP",telefone:"111",grupo:"Estagiário"},
+           {nome:"Daniel 2",nascimento:new Date(),endereco:"Rua 2",bairro:"jardim 2",cidade:"Atibaia",telefone:"222",grupo:"Criança"},
+           {nome:"Daniel 3",nascimento:new Date(),endereco:"Rua 3",bairro:"jardim 3",cidade:"Bragança",telefone:"333",grupo:"Voluntário"}
+        ]
         ,
         modalData:{
           id: "modalUsuario",
@@ -36,7 +37,7 @@ export default {
         }
       }
     },
-    mounted(){
+/*     mounted(){
       this.$http
       .get("/usuarios").
       then(result =>{
@@ -48,7 +49,7 @@ export default {
         alert(error);     
         console.log(error);
       })
-    },
+    }, */
     methods:{
       editarUsuario(linhaUsuario){
         this.modalData.content = linhaUsuario;

@@ -2,7 +2,7 @@
   <div>
     <b-form @submit="onSubmit">
       <div class="mt-1">Nome: {{nome}}</div>
-      <b-form-input v-model="usuarioModel.nome" placeholder=""></b-form-input>
+      <b-form-input v-model="usuarioModel.nome" placeholder="Insira seu nome"></b-form-input>
 
       <div class="mt-2">Data de Nascimento: {{data}}</div>
       <b-form-input type="date" v-model="usuarioModel.nome" placeholder="Data de nascimento"></b-form-input>

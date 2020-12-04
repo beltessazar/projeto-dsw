@@ -52,7 +52,6 @@
       <b-modal id="form"  title="Cadastro Vinde Meninos">
         <Formulario/>
       </b-modal>
-
     </div>  
 </template>
 
@@ -74,7 +73,7 @@ export default {
       }
     }
   },
-  methods:{
+/*   methods:{
     getUserData(){
       this.$http.get("/api/user")
       .then(response => {
@@ -85,7 +84,7 @@ export default {
         this.$router.push("/");
       });
     }
-  },
+  } */
   mounted(){
     // this.getUserData();
   }
