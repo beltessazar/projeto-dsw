@@ -1,8 +1,8 @@
 <template>
     <div>
-        <img src="../imagens/logo.png" alt="Logo do site">
-        <h1>Sistema de Cadastro Vinde Meninos</h1>
-
+        <!-- <img src="../imagens/logo.png" alt="Logo do site"> -->
+        <h1>ONG</h1>
+        <h2>Sistema de Cadastro</h2>
       <b-button v-b-modal.form>Cadastro</b-button>
 
         <b-dropdown right text="Planilhas">
@@ -94,8 +94,8 @@ export default {
 
 <style>
 b-button{
-  position: inline;
-  margin: 5px;
+  display: flex;
+  justify-content: space-around;  
 }
 b-modal{
   width: 100%;
