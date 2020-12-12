@@ -2,35 +2,35 @@
   <div>
     <b-form @submit="onSubmit">
       <div class="mt-1">Nome: {{nome}}</div>
-      <b-form-input v-model="usuarioModel.nome" placeholder="Insira seu nome"></b-form-input>
+      <b-form-input v-model="usuarioModel.nome" placeholder="Insira seu nome" required></b-form-input>
 
       <div class="mt-2">Data de Nascimento: {{data}}</div>
-      <b-form-input type="date" v-model="usuarioModel.nome" placeholder="Data de nascimento"></b-form-input>
+      <b-form-input type="date" v-model="usuarioModel.data" placeholder="Data de nascimento" required></b-form-input>
 
       <div class="mt-3">Nacionalidade: {{ nacionalidade }}</div>
-      <b-form-input v-model="usuarioModel.nacionalidade" placeholder="Nacionalidade"></b-form-input>
+      <b-form-input v-model="usuarioModel.nacionalidade" placeholder="Nacionalidade" required></b-form-input>
 
       <div class="mt-4">Endereço: {{endereco}}</div>
-      <b-form-input v-model="usuarioModel.endereco" ></b-form-input>
+      <b-form-input v-model="usuarioModel.endereco" required></b-form-input>
 
       <div class="mt-5">Bairro: {{bairro}}</div>
-      <b-form-input v-model="usuarioModel.bairro" ></b-form-input>
+      <b-form-input v-model="usuarioModel.bairro" required></b-form-input>
 
       <div class="mt-6">Cidade: {{cidade}}</div>
-      <b-form-input v-model="usuarioModel.cidade" placeholder=""></b-form-input>
+      <b-form-input v-model="usuarioModel.cidade" placeholder="" required></b-form-input>
 
       <div class="mt-7">Telefone: {{telefone}}</div>
-      <b-form-input type="" v-model="usuarioModel.telefone" placeholder=""></b-form-input>
+      <b-form-input type="" v-model="usuarioModel.telefone" placeholder="" required></b-form-input>
 
-      <b-form-group label="Grupo">
-      <b-form-radio v-model="selected" name="some-radios" value="Estagiário">Estagiário</b-form-radio>
-      <b-form-radio v-model="selected" name="some-radios" value="Voluntário">Voluntário</b-form-radio>
-      <b-form-radio v-model="selected" name="some-radios" value="Criança">Criança</b-form-radio>
+      <b-form-group label="Grupo" required>
+      <b-form-radio v-model="usuarioModel.selected" name="some-radios" value="Estagiário">Estagiário</b-form-radio>
+      <b-form-radio v-model="usuarioModel.selected" name="some-radios" value="Voluntário">Voluntário</b-form-radio>
+      <b-form-radio v-model="usuarioModel.selected" name="some-radios" value="Criança">Criança</b-form-radio>
       </b-form-group>
       
       <div class="mt-3">Grupo Selecionado: <strong>{{ usuarioModel.selected }}</strong></div>
 
-    <b-button variant="danger">Limpar</b-button>
+    <b-button type="reset" variant="danger">Limpar</b-button>
     <b-button type="submit" fvariant="success">Salvar</b-button>
 
     </b-form>
@@ -54,18 +54,31 @@ export default {
     },
     methods: {
       onSubmit(){
-        this.callback(this.usuarioModel);
+        //this.callback(this.usuarioModel);
+        alert(JSON.stringify(this.usuarioModel));
       },
       salvarUsuario(){
-        this.usuarioModel.callback = () => {
+        /* this.usuarioModel.callback = () => {
 
-        }
+        } */
+      },
+      onReset(){
+        this.usuarioModel.nome = '';
+        this.usuarioModel.data = '';
+        this.usuarioModel.nacionalidade = '';
+        this.usuarioModel.endereco = '';
+        this.usuarioModel.bairro = '';
+        this.usuarioModel.cidade = '';
+        this.usuarioModel.telefone = '';
+        this.usuarioModel.foto = '';
+        this.usuarioModel.selected = '';
+
       }
     },
     data() {
       return {
         usuarioModel:{
-          nome: 'Digite nome do usuário',
+          nome: '',
           data: new Date(),
           nacionalidade: '',
           endereco: '',
@@ -74,7 +87,7 @@ export default {
           telefone:'',
           foto:'',
           selected: '',
-          callback: null
+          //callback: null
         }
       }
     },
