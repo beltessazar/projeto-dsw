@@ -6,6 +6,7 @@ const routes = express.Router();
 routes.post("/usuario", usuarioController.create);
 routes.get("/usuarios", usuarioController.getAll);
 routes.get("/usuario/?", usuarioController.findByPk);
-routes.delete("/usuario/?", usuarioController.deleteByPk);
+routes.delete("/usuario/:id", usuarioController.deleteByPk);
+//routes.delete("/usuario/?", usuarioController.deleteByPk);
 
 module.exports = routes;
