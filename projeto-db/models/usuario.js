@@ -14,6 +14,15 @@ module.exports = sequelize => {
       field: "id",
       unique: "id"
     },
+    nome: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null, 
+      field: "nome"
+    },
     dataNascimento: {
       type: DataTypes.DATEONLY,
       allowNull: true,
@@ -67,6 +76,15 @@ module.exports = sequelize => {
       autoIncrement: false,
       comment: null,
       field: "telefone"
+    },
+    foto:{
+      type: DataTypes.BLOB,
+      allowNull:true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "foto"
     },
     grupoId: {
       type: DataTypes.INTEGER(11),
