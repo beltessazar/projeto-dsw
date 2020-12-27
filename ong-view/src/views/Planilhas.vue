@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import axios from "axios";
 /* import Formulario from "@/components/Formulario.vue"; */
 export default {
     components:{
@@ -25,9 +26,9 @@ export default {
         // Note `isActive` is left out and will not appear in the rendered table
         fields: ['nome', 'nascimento', 'endereco', 'bairro', 'cidade', 'telefone', 'grupo', 'editar'],
         items: [
-           {nome:"Daniel 1",nascimento:new Date(),endereco:"Rua 1",bairro:"jardim 1",cidade:"BJP",telefone:"111",grupo:"Estagiário"},
-           {nome:"Daniel 2",nascimento:new Date(),endereco:"Rua 2",bairro:"jardim 2",cidade:"Atibaia",telefone:"222",grupo:"Criança"},
-           {nome:"Daniel 3",nascimento:new Date(),endereco:"Rua 3",bairro:"jardim 3",cidade:"Bragança",telefone:"333",grupo:"Voluntário"}
+          //  {nome:"Daniel 1",nascimento:new Date(),endereco:"Rua 1",bairro:"jardim 1",cidade:"BJP",telefone:"111",grupo:"Estagiário"},
+          //  {nome:"Daniel 2",nascimento:new Date(),endereco:"Rua 2",bairro:"jardim 2",cidade:"Atibaia",telefone:"222",grupo:"Criança"},
+          //  {nome:"Daniel 3",nascimento:new Date(),endereco:"Rua 3",bairro:"jardim 3",cidade:"Bragança",telefone:"333",grupo:"Voluntário"}
         ]
         ,
         modalData:{
@@ -37,9 +38,9 @@ export default {
         }
       }
     },
-/*     mounted(){
-      this.$http
-      .get("/usuarios").
+     mounted(){
+      axios
+      .get("http://localhost:8888/usuarios").
       then(result =>{
         console.log("Certo");
         this.items = result.data;
@@ -49,7 +50,7 @@ export default {
         alert(error);     
         console.log(error);
       })
-    }, */
+    }, 
     methods:{
       editarUsuario(linhaUsuario){
         this.modalData.content = linhaUsuario;

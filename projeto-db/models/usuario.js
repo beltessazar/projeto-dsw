@@ -1,5 +1,5 @@
 const {
-  DataTypes
+  DataTypes, BLOB
 } = require('sequelize');
 
 module.exports = sequelize => {
@@ -16,11 +16,11 @@ module.exports = sequelize => {
     },
     nome: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
-      comment: null, 
+      comment: null,
       field: "nome"
     },
     dataNascimento: {
@@ -77,9 +77,9 @@ module.exports = sequelize => {
       comment: null,
       field: "telefone"
     },
-    foto:{
-      type: DataTypes.BLOB,
-      allowNull:true,
+    foto: {
+      type: BLOB,
+      allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
