@@ -36,16 +36,17 @@ const Usuario = model.usuarioModel;
   };
 
   const deleteByPk = (request, response) => {
+
     //Usuario.id = request.params;
     console.log(request);
     Usuario.destroy({
-      //Esse Where está parecendo ser o problema, nao consigo associar o parametro ao campo iD do usuario
-      where: { Usuarioid: request.params.id },
+      //Esse Where está parescendo ser o problema, nao consigo associar o parametro ao campo iD do usuario
+      where: {id: request.params.id},
     })
       .then((object) => {
-        console.log(object);
+        console.log("Excluido");
         response.status(200);
-        response.send(object);
+        response.send("Excluido");
 
       })
       .catch((error) => {
