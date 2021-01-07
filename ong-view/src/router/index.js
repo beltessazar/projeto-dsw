@@ -20,7 +20,7 @@ Vue.use(VueRouter)
     path: '/home',
     name: 'Home',
     component: Home,
-    meta:{notRenderMenu: true},
+    meta:{notRenderMenu: false},
   },
 /*   {
     path: '/criancas',

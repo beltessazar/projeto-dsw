@@ -3,9 +3,10 @@
         <!-- <img src="../imagens/logo.png" alt="Logo do site"> -->
         <h1>ONG</h1>
         <h2>Sistema de Cadastro</h2>
-      <b-button v-b-modal.form>Cadastro</b-button>
+      <div class="menu">
+        <b-button v-b-modal.form class="botao">Cadastro</b-button>
 
-        <b-dropdown right text="Planilhas">
+        <b-dropdown right text="Planilhas" class="botao">
           <b-dropdown-item v-b-modal.planilhasC >Crianças</b-dropdown-item>
             <b-modal id="planilhasC" size="xl" title="Planilha Crianças">
               <div>
@@ -26,7 +27,7 @@
             </b-modal>
         </b-dropdown>
 
-        <b-dropdown right text="Grupos">
+        <b-dropdown right text="Grupos" class="botao">
           <b-dropdown-item v-b-modal.criancas>Crianças</b-dropdown-item>
           <b-modal id="criancas" title="Criancas">
             <div>
@@ -47,6 +48,7 @@
         </b-modal>
 
         </b-dropdown>
+      </div>
 
       <!-- Modals diversos -->
       <b-modal id="form"  title="Cadastro Vinde Meninos">
@@ -65,29 +67,6 @@ import Planilhas from "@/views/Planilhas.vue"
 export default {
   name: 'Menu',
   components: {Formulario, Criancas, Voluntarios, Estagiarios, Planilhas},
-  data(){
-    return {
-      userData:{
-      id: "",
-      nome: ""
-      }
-    }
-  },
-/*   methods:{
-    getUserData(){
-      this.$http.get("/api/user")
-      .then(response => {
-        this.userData = response.data;
-      }).error(error => {
-        console.log("Erro ou falta de permissão.");
-        console.error(error);
-        this.$router.push("/");
-      });
-    }
-  } */
-  mounted(){
-    // this.getUserData();
-  }
 }
 
 </script>
@@ -99,5 +78,15 @@ b-button{
 }
 b-modal{
   width: 100%;
+}
+.menu{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    margin-top: 50px;
+}
+.botao{
+    width: 100px;
+    margin-left: 30px;
 }
 </style>

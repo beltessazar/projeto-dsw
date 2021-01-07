@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
 /* import Formulario from "@/components/Formulario.vue"; */
 export default {
     components:{
@@ -39,7 +38,7 @@ export default {
       }
     },
      mounted(){
-      axios
+      this.$http
       .get("http://localhost:8888/usuarios").
       then(result =>{
         console.log("Certo");

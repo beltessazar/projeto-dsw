@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 //import api from "./api.js"
 import VueCookies from "vue-cookies"
+import axios from "axios";
+Vue.prototype.$http = axios;
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

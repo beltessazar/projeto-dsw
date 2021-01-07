@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "Login",
     data(){
@@ -56,16 +57,17 @@ export default {
             user: this.login.user,
             pwd: this.login.senha
         };
-            this.$http.post("/api/login", dataLogin)
-            .then(response =>{
-                console.log(response.data);
-                this.$router.push("/home")
-            })
-            .catch(errors=>{
-                console.log("Falha no Login!");
-                alert("Falha no Login!");
-                console.log(errors);
-            })
+        
+        axios.post("/api/login", dataLogin)
+        .then(response =>{
+            console.log(response.data);
+            this.$router.push("/home")
+        })
+        .catch(errors=>{
+            console.log("Falha no Login!");
+            alert("Falha no Login!");
+            console.log(errors);
+        }) 
         }
     }
 }
