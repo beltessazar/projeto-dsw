@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div>
         <img src="../imagens/logo.png" alt="Logo">
     <div class="login">
@@ -56,16 +56,15 @@ export default {
             let dataLogin = {
             user: this.login.user,
             pwd: this.login.senha
-        };
-        
-        axios.post("/api/login", dataLogin)
+        }; 
+        this.$http.post("/api/login", dataLogin)
         .then(response =>{
             console.log(response.data);
             this.$router.push("/home")
         })
         .catch(errors=>{
-            console.log("Falha no Login!");
-            alert("Falha no Login!");
+            console.log("teste!");
+            alert("teste!");
             console.log(errors);
         }) 
         }
@@ -77,4 +76,4 @@ export default {
 .login{
     margin: 50px 350px 0px 350px;
 }
-</style>
+</style>!-->

@@ -81,9 +81,9 @@ b-modal{
 }
 .menu{
     display: flex;
-    width: 100vw;
     justify-content: center;
     margin-top: 50px;
+    margin-right: 30px;
 }
 .botao{
     width: 100px;

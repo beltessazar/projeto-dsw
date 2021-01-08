@@ -5,6 +5,7 @@ const cors = require("cors");
 const passport = require("passport");
 const { request, response } = require("express");
 const LocalStrategy = require("passport-local").Strategy;
+
 //O que vamos precisar
 //servidor de aplicação express
 const app = express();
@@ -17,11 +18,14 @@ app.use(
         maxAge: 60 * 1000,//1minuto
     })
 )
+//gerenciador de cors - cors
+app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
+
+
 //gerenciador de Login - passaporte
 //essa lista simula o banco de dados
 //fonte de dados para os usuarios - lista de usuarios 
 
-//gerenciador de cors - cors
 
 //chamado no sentido do back-end para o front
 passaport.serializeUser((user,done) => {
@@ -37,7 +41,6 @@ passport.deserializeUser((id,done) => {
     done(null, user.id);
 });
 
-app.use(cors({credentials: true, origin: "http://localhost:8080"}));
 
 const users = [
     {
@@ -102,6 +105,15 @@ const authMiddleware = (request, response, next) => {
       next();
     }
   };
+
+
+app.get("/api/logout", (request,response) => {
+    request.logout();
+
+    console.log("Logout realizado");
+    return response.send();
+
+});
 
 app.get("/api/user", authMiddleware, (request, response) => {
     //console.log(request.session);
