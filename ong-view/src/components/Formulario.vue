@@ -4,6 +4,7 @@
       
       <!--<div class="mt-0">Foto: </div>
       <input input type="file"  name="image" id="image"  accept="image/*" >!-->
+
       <div class="row">
         <div class="col-md">
           <div class="card" style="width: 18rem;">
@@ -31,7 +32,7 @@
       <b-form-input v-model="usuarioModel.nome" placeholder="Insira seu nome" required></b-form-input>
 
       <div class="mt-2">Data de Nascimento: {{usuarioModel.dataNascimento}}</div>
-      <b-form-input type="date" v-model="usuarioModel.dataNascimento" placeholder="Data de nascimento" required></b-form-input>
+      <b-form-datepicker type="date" v-model="usuarioModel.dataNascimento" placeholder="Data de nascimento" required></b-form-datepicker>
 
       <div class="mt-3">Nacionalidade: {{ usuarioModel.nacionalidade }}</div>
       <b-form-input v-model="usuarioModel.nacionalidade" placeholder="Nacionalidade" required></b-form-input>
@@ -79,7 +80,7 @@ export default {
     props:{
       usuarioEdit:{
         nome: String,
-        dataNascimento: Date,
+        dataNascimento: String,
         endereco: String,
         bairro: String,
         cidade: String,
@@ -102,7 +103,7 @@ export default {
 
         //alert("Enviando..." + JSON.stringify(this.usuarioModel));
         //console.log(url+eventPath);
-
+        
         axios.post(url + eventPath, this.usuarioModel)
               .then(response => {
                 console.log(response);

@@ -78,7 +78,7 @@ module.exports = sequelize => {
       field: "telefone"
     },
     foto: {
-      type: BLOB,
+      type: DataTypes.BLOB("long"),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
