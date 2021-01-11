@@ -1,53 +1,27 @@
 <template>
   <div>
     <b-form @submit="onSubmit">
-      
-      <!--<div class="mt-0">Foto: </div>
-      <input input type="file"  name="image" id="image"  accept="image/*" >!-->
 
-      <div class="row">
-        <div class="col-md">
-          <div class="card" style="width: 18rem;">
-            <div title="Remove image" class="close" v-show="usuarioModel.foto[0].content" @click="removeImage(0)"></div>
-            <img class="card-img-top" v-if="usuarioModel.foto[0].content" alt="Card image cap" :src="usuarioModel.foto[0].content"
-              width="200px" style="padding: 20px; border-radius: 30px;" />
-            <div class="card-body">
-              <h5 class="card-title">Foto do usuário</h5>
-              <p class="card-text">
-               <b>Opcional:</b> Faça upload da foto do usuário que será cadastrado.
-              </p>
-              <div class="upload-btn-wrapper">
-                <button class="btn btn-success">
-                  {{ usuarioModel.foto[0].content ? "Replace image" : "Upload image" }}
-                </button>
-                <input type="file" @change="onImage(0 ,$event)" accept="image/*" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="mt-1">Nome: {{usuarioModel.nome}}</div>
+      <div class="field">Nome: {{usuarioModel.url}}</div>
       <b-form-input v-model="usuarioModel.nome" placeholder="Insira seu nome" required></b-form-input>
 
-      <div class="mt-2">Data de Nascimento: {{usuarioModel.dataNascimento}}</div>
+      <div class="field">Data de Nascimento: {{usuarioModel.dataNascimento}}</div>
       <b-form-datepicker type="date" v-model="usuarioModel.dataNascimento" placeholder="Data de nascimento" required></b-form-datepicker>
 
-      <div class="mt-3">Nacionalidade: {{ usuarioModel.nacionalidade }}</div>
+      <div class="field">Nacionalidade: {{ usuarioModel.nacionalidade }}</div>
       <b-form-input v-model="usuarioModel.nacionalidade" placeholder="Nacionalidade" required></b-form-input>
 
-      <div class="mt-4">Endereço: {{usuarioModel.endereco}}</div>
-      <b-form-input v-model="usuarioModel.endereco" required></b-form-input>
+      <div class="field">Endereço: {{usuarioModel.endereco}}</div>
+      <b-form-input v-model="usuarioModel.endereco" placeholder="Digite o endereço" required></b-form-input>
 
-      <div class="mt-5">Bairro: {{usuarioModel.bairro}}</div>
-      <b-form-input v-model="usuarioModel.bairro" required></b-form-input>
+      <div class="field">Bairro: {{usuarioModel.bairro}}</div>
+      <b-form-input v-model="usuarioModel.bairro" placeholder="Digite o bairro" required></b-form-input>
 
-      <div class="mt-6">Cidade: {{usuarioModel.cidade}}</div>
-      <b-form-input v-model="usuarioModel.cidade" placeholder="" required></b-form-input>
+      <div class="field">Cidade: {{usuarioModel.cidade}}</div>
+      <b-form-input v-model="usuarioModel.cidade" placeholder="Digite a cidade" required></b-form-input>
 
-      <div class="mt-7">Telefone: {{usuarioModel.telefone}}</div>
-      <b-form-input v-model="usuarioModel.telefone" placeholder="" required></b-form-input>
+      <div class="field">Telefone: {{usuarioModel.telefone}}</div>
+      <b-form-input v-model="usuarioModel.telefone" placeholder="Digite o telefone" required></b-form-input>
 
       <b-form-group label="Grupo" required>
         <b-form-radio v-model="usuarioModel.grupoId" name="some-radios" value=1>Estagiário</b-form-radio>
@@ -55,11 +29,12 @@
         <b-form-radio v-model="usuarioModel.grupoId" name="some-radios" value=3>Criança</b-form-radio>
       </b-form-group>
       
-      <div class="mt-3">Grupo Selecionado: <strong>{{ usuarioModel.grupoId }}</strong></div>
+      <div class="field">Grupo Selecionado: <strong>{{ usuarioModel.grupoId }}</strong></div>
 
-    <b-button type="reset" variant="danger">Limpar</b-button>
-    <b-button type="submit" fvariant="success">Salvar</b-button>
-
+    <div class="botoes">
+      <b-button type="reset" variant="danger" style="margin-right:15px">Limpar</b-button>
+      <b-button type="submit" fvariant="success" style="background-color:#38e48d; border:0px">Salvar</b-button>
+    </div>
     </b-form>
   </div>
 </template>
@@ -79,13 +54,13 @@ export default {
     name: 'Formulario',
     props:{
       usuarioEdit:{
+        id: Number,
         nome: String,
         dataNascimento: String,
         endereco: String,
         bairro: String,
         cidade: String,
         telefone: String,
-        foto: Array,
         grupoId: Number
       },
         modalTarget: String,
@@ -94,8 +69,6 @@ export default {
     methods: {
       onSubmit(){
         this.salvarUsuario();
-        
-      
       },
       salvarUsuario(){
          const url = "http://localhost:8888/";
@@ -103,17 +76,32 @@ export default {
 
         //alert("Enviando..." + JSON.stringify(this.usuarioModel));
         //console.log(url+eventPath);
-        
-        axios.post(url + eventPath, this.usuarioModel)
-              .then(response => {
-                console.log(response);
-                alert("Evento criado: " + response.data);
-                this.$emit("exit", true);
-              })
-              .catch(error => {
-                console.log(error);
-                alert(error);
-              });
+        if(this.usuarioEdit.id == null){
+          axios.post(url + eventPath, this.usuarioModel)
+                .then(response => {
+                  console.log(response);
+                  alert("Usuário Criado");
+                  this.$emit("exit", true);
+                })
+                .catch(error => {
+                  console.log(error);
+                  alert(error);
+                });
+        }
+        else{
+          console.log("chegou aqui");
+          console.log(this.usuarioModel);
+          axios.put(url + eventPath+"/"+this.usuarioEdit.id, this.usuarioModel)
+                .then(response => {
+                  console.log(response);
+                  alert("Usuário atualizado");
+                  this.$router.go()
+                })
+                .catch(error => {
+                  console.log(error);
+                  alert(error);
+                });
+        }
       },
       onReset(){
         this.usuarioModel.nome = '';
@@ -125,62 +113,6 @@ export default {
         this.usuarioModel.foto = new Array(3);
         this.usuarioModel.grupoId = 0;
 
-      },
-       onImage(index, e, method) {
-            e.stopPropagation();
-            e.preventDefault();
-
-            if (index === 2) this.dragEnter = false;
-            // Checa se o evento é de drop ou upload
-            const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-
-            if (!file.type.match('image.*')) alert('Select a valid image file');
-            // verifica se o arquivo é maior que 1 MB
-            else if (file.size > 1e6)  this.resizeImage(index, file, method);
-            else this.usuarioModel.foto[index].content = URL.createObjectURL(file);
-      },
-      removeImage(index) {
-            this.dragEnter = false;
-            this.foto[index].content = null;
-      },
-      resizeImage(index, file, method) {
-          const reader = new FileReader();
-          reader.onload = readerEvent => {
-              const img = new Image();
-              // iniciar o ajuste de imagem
-              img.onload = () => {
-                  const { width, height } =
-                      method === 1
-                          ? this.aspectRatioResize(300)
-                          : this.proportionalResize(img.width, img.height);
-                  const canvas = document.createElement('canvas');
-                  canvas.width = width;
-                  canvas.height = height;
-                  // Isso é usado para adicionar a imagem na tela especificando a posição, largura e altura da imagem.
-                  canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                  // Exporta na tela como um blob (base64) ou DataURL especificando o tipo MIME, a qualidade da imagem
-                  this.foto[index].content = canvas.toDataURL(
-                      'image/jpeg',
-                      QUALITY.medium
-                  );
-              };
-              img.src = readerEvent.target.result;
-          };
-          // Leia a imagem de entrada usando FileReader (isso dispara o evento reader.onload).
-          reader.readAsDataURL(file);
-      },
-      aspectRatioResize(length) {
-          const aspectRatio = Math.round(screen.width / screen.height);
-          return {
-              width: length / Math.sqrt(1 / Math.pow(aspectRatio, 2) + 1),
-              height: length / Math.sqrt(Math.pow(aspectRatio, 2) + 1)
-          };
-      },
-      proportionalResize(width, height) {
-          return {
-              width: Math.round((MAX_WIDTH / width) * width),
-              height: Math.round((MAX_HEIGHT / height) * height)
-          };
       }
     },
     data() {
@@ -188,14 +120,12 @@ export default {
         usuarioModel:{
           nome: "",
           dataNascimento: new Date(),
+          url:"",
           nacionalidade: "",
           endereco: "",
           bairro: "",
           cidade: "",
           telefone: "",
-          foto: new Array(3)
-          .fill()
-          .map((el,index) => ({content:null, key:index})),
           grupoId: 0,
         }
       }
@@ -208,7 +138,7 @@ export default {
         this.usuarioModel.bairro = this.usuarioEdit.bairro;
         this.usuarioModel.cidade = this.usuarioEdit.cidade;
         this.usuarioModel.telefone = this.usuarioEdit.telefone;
-        this.usuarioModel.foto = this.usuarioEdit.foto;
+        this.usuarioModel.nacionalidade = this.usuarioEdit.nacionalidade;
         this.usuarioModel.grupoId = this.usuarioEdit.grupoId;
       }
     }
@@ -220,77 +150,14 @@ export default {
 #fluid{
   widows: 80%;
 }
-.upload-btn-wrapper input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  cursor: pointer;
+
+.botoes{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
+.field{
+  margin-top: 10px !important;
 }
-.drop {
-  border-radius: 5px;
-  width: 230px;
-  height: 230px;
-  padding: 10px;
-  margin: 25px 20px 20px 20px;
-}
-.close {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
-  cursor: pointer;
-}
-.close:hover {
-  opacity: 1;
-}
-.close:before,
-.close:after {
-  position: absolute;
-  left: 15px;
-  content: " ";
-  height: 33px;
-  width: 2px;
-  background-color: #333;
-}
-.close:before {
-  transform: rotate(45deg);
-}
-.close:after {
-  transform: rotate(-45deg);
-}
-
-.ondrag-enter {
-  border: 2px dashed green;
-  background-color: #c8f0c9;
-}
-.ondrag-leave {
-  border: 1px solid lightgrey;
-  background-color: #f2f2f2;
-  /* Background image to indicate the upload area */
-  /*background-image: url("../img/picture.svg");*/
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: 50% 75%;
-}
-.card-text {
-  text-align: justify;
-}
-.card-title {
-  color: #008f83;
-}
-.card-img-top {
-  margin-top: 30px;
-}
-
-
 </style>

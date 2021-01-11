@@ -3,22 +3,31 @@
   <b-table striped hover :items="items" :fields="fields">
       <template v-slot:cell(editar)="linhaUsuario">
         
-          <b-button @click="editarUsuario(linhaUsuario.item)">Editar</b-button>
+          <b-button @click="editarUsuario(linhaUsuario.item)" style="background-color:#248ce9; border:0px ">Editar</b-button>
       </template>
   </b-table>
 
-  <b-modal @hide="resetaModalData()" :id="modalData.id" :title="modalData.title">
-      <!-- <Formulario :usuarioEdit="modalData.content" :callback="modalData.callback"></Formulario> -->
-  </b-modal>
+  <!--<b-modal @hide="resetaModalData()" :id="modalData.id" :title="modalData.title">
+      <Formulario :usuarioEdit="modalData.content" :callback="modalData.callback"></Formulario> 
+  </b-modal>-->
+
+    <b-modal :id="modalData.id" :title="modalData.title" hide-footer>
+      <Formulario v-bind:usuarioEdit="modalData.content" mod></Formulario>
+    </b-modal>
   
 </div>  
 </template>
 
 <script>
-/* import Formulario from "@/components/Formulario.vue"; */
+ import Formulario from "@/components/Formulario.vue"; 
+
 export default {
+    name:"Planilhas",
     components:{
-      /* Formulario, */
+       Formulario
+    },
+    props:{
+        groupId: Number
     },
     data() {
       return {
@@ -34,12 +43,13 @@ export default {
           id: "modalUsuario",
           content: null,
           title: "",
-        }
+        },
       }
     },
      mounted(){
+      console.log(this.groupId);
       this.$http
-      .get("http://localhost:8888/usuarios").
+      .get("http://localhost:8888/usuarios/" + this.groupId).
       then(result =>{
         console.log("Certo");
         this.items = result.data;
@@ -55,7 +65,6 @@ export default {
         this.modalData.content = linhaUsuario;
         this.modalData.title = "Edite dados do usuário \"" + linhaUsuario.nome +"\"";
         this.modalData.callback = () => {
-
         }
         this.$root.$emit('bv::show::modal', this.modalData.id);
         //console.log(linhaUsuario);

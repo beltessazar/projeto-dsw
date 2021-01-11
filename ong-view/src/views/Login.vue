@@ -38,21 +38,22 @@
 </template>
 
 <script>
+
 export default {
     name: "Login",
     data(){
         return{
             login:{
-                user:"user@email.com",
-                senha:"123"
+                user:"",
+                pwd:""
             }
         };  
     },
     methods:{
         doLogin(){
             let dataLogin = {
-            user: this.login.user,
-            pwd: this.login.senha
+            username: this.login.user,
+            password: this.login.pwd
             }
             this.$http.post("/api/login", dataLogin)
             .then(response =>{
