@@ -76,12 +76,12 @@ export default {
 
         //alert("Enviando..." + JSON.stringify(this.usuarioModel));
         //console.log(url+eventPath);
-        if(this.usuarioEdit.id == null){
+        if(this.usuarioEdit == undefined){
           axios.post(url + eventPath, this.usuarioModel)
                 .then(response => {
                   console.log(response);
                   alert("Usuário Criado");
-                  this.$emit("exit", true);
+                   this.$router.go()
                 })
                 .catch(error => {
                   console.log(error);

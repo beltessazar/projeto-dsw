@@ -5,6 +5,10 @@
         
           <b-button @click="editarUsuario(linhaUsuario.item)" style="background-color:#248ce9; border:0px ">Editar</b-button>
       </template>
+      <template v-slot:cell(excluir)="linhaUsuario">
+        
+          <b-button @click="excluirUsuario(linhaUsuario.item)" style="background-color:#248ce9; border:0px ">Excluir</b-button>
+      </template>
   </b-table>
 
   <!--<b-modal @hide="resetaModalData()" :id="modalData.id" :title="modalData.title">
@@ -32,7 +36,7 @@ export default {
     data() {
       return {
         // Note `isActive` is left out and will not appear in the rendered table
-        fields: ['nome', 'nascimento', 'endereco', 'bairro', 'cidade', 'telefone', 'grupo', 'editar'],
+        fields: ['nome', 'nascimento', 'endereco', 'bairro', 'cidade', 'telefone', 'grupo', 'editar', 'excluir'],
         items: [
           //  {nome:"Daniel 1",nascimento:new Date(),endereco:"Rua 1",bairro:"jardim 1",cidade:"BJP",telefone:"111",grupo:"Estagiário"},
           //  {nome:"Daniel 2",nascimento:new Date(),endereco:"Rua 2",bairro:"jardim 2",cidade:"Atibaia",telefone:"222",grupo:"Criança"},
@@ -68,6 +72,17 @@ export default {
         }
         this.$root.$emit('bv::show::modal', this.modalData.id);
         //console.log(linhaUsuario);
+      },
+      excluirUsuario(linhaUsuario){
+        this.$http.delete("http://localhost:8888/usuario/" + linhaUsuario.id)
+          .then(() =>{
+          alert("Usuario removido!");
+          this.$router.go()
+      })
+      .catch(error =>{
+        alert(error);     
+        console.log(error);
+      })
       },
 
       resetaModalData(){
