@@ -14,32 +14,6 @@ const Usuario = model.usuarioModel;
   };
 
   const update = (request, response) => {
-
-/*     Usuario.findByPk(request.body.id)
-    .then((object) => {
-      if(object){
-        Usuario.update({
-          nome: request.body.nome,
-          dataNascimento: request.body.dataNascimento,
-          nacionalidade: request.body.nacionalidade,
-          endereco: request.body.endereco,
-          bairro: request.body.bairro,
-          cidade: request.body.cidade,
-          telefone: request.body.telefone,
-          grupoId: request.body.groupId,
-        }).then((object)=>{
-          console.log(object);
-          console.log("Tudo conforme o planejado até aqui...");
-          response.status(200).send(object);
-      }).catch((error) => {
-          console.log(error);
-        })   
-      }
-    }).catch((error)=>{
-      console.log(error);
-      response.sendStatus(400).send(error);
-    }); */
-
     const paData = {
           nome: request.body.nome,
           dataNascimento: request.body.dataNascimento,
@@ -63,21 +37,6 @@ const Usuario = model.usuarioModel;
     }).catch((error) => {
       console.log(error);
     })  
-    /*  const usuarioEdit = {
-      nome: request.body.nome,
-      groupId: request.body.groupId,
-    };
-    Usuario.update(usuarioEdit, {
-      raw: true,
-      where: { id: request.body.id },
-    }).then((object)=>{
-        console.log(object);
-        console.log("Tudo conforme o planejado até aqui...");
-        response.status(200).send(object.dataValues);
-    }).catch((error)=>{
-        console.log(error);
-        response.sendStatus(400).send(error);
-    }); */
   };
 
   const getAll = (request, response) => {
